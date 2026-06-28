@@ -6,6 +6,8 @@ KEYS
 chmod 700 /root/.ssh
 chmod 600 /root/.ssh/authorized_keys
 sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
+sed -i '/^AuthenticationMethods /d' /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
+sed -i '/^AuthenticationMethods /d' /etc/ssh/sshd_config
 grep -q 'PasswordAuthentication' /etc/ssh/sshd_config.d/60-cloudimg-settings.conf || echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
 systemctl restart ssh
 echo "OK"
